@@ -412,10 +412,11 @@ getDbAnnotations <- function(scenicOptions)
     
     if(!is.null(scenicOptions@settings$db_mcVersion))
     {
-      if(scenicOptions@settings$db_mcVersion=="v8") motifAnnotName <- paste0(motifAnnotName, "_v8")
+	motifAnnotName <- paste0(motifAnnotName, scenicOptions@settings$db_mcVersion)
     }
     
     library(RcisTarget) # Lazyload
+    print(motifAnnotName)
     data(list=motifAnnotName, package="RcisTarget", verbose = FALSE)
     motifAnnotations <- eval(as.name(motifAnnotName))
   }
