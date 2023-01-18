@@ -331,7 +331,7 @@ setMethod("loadInt",
 ################## Functions ######################################
 #' @rdname ScenicOptions-class
 #' @export 
-initializeScenic <- function(org=NULL, dbDir="databases", dbs=NULL, datasetTitle="", nCores=4, dbIndexCol='features')
+initializeScenic <- function(org=NULL, dbDir="databases", dbs=NULL, datasetTitle="", nCores=4, dbIndexCol)
 {
   inputDataset<- list(
     org=org,
@@ -452,7 +452,7 @@ initializeScenic <- function(org=NULL, dbDir="databases", dbs=NULL, datasetTitle
   
   ## Check if motif annotation and rankings potentially match
   motifAnnot <- getDbAnnotations(object)
-  featuresWithAnnot <- checkAnnots(object, motifAnnot)
+  featuresWithAnnot <- checkAnnots(object, motifAnnot, dbIndexCol)
   if(any(featuresWithAnnot == 0)) message("Missing annotations for: \n", paste("\t", names(which(featuresWithAnnot==0))))
   
   ## Return
