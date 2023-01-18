@@ -471,7 +471,7 @@ dbVersion <- function(dbs)
 
 #' @rdname ScenicOptions-class
 #' @export 
-dbLoadingAttempt <- function(dbFilePath, indexCol='features'){
+dbLoadingAttempt <- function(dbFilePath, indexCol=dbIndexCol){
     ret <- FALSE
     ret <- tryCatch({
     rf <- arrow::ReadableFile$create(dbFilePath)
@@ -494,12 +494,12 @@ dbLoadingAttempt <- function(dbFilePath, indexCol='features'){
 
 #' @rdname ScenicOptions-class
 #' @export 
-checkAnnots <- function(object, motifAnnot)
+checkAnnots <- function(object, motifAnnot, rnktype=dbIndexCol)
 {
   allFeaturesInAnnot <- unlist(motifAnnot[,1]) # motif or track
   featuresWithAnnot <-  lapply(getDatabases(object), function(dbFile) 
   {
-    rnktype = "features"	#TODO: add as option for custom dbs
+    #rnktype = "features"	#TODO: add as option for custom dbs
     nRnks <- getRanking(RcisTarget::importRankings(dbFile, columns = rnktype))
     nRnks <- dplyr::pull(nRnks, rnktype)
 
