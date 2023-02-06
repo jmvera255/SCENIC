@@ -74,7 +74,7 @@ runSCENIC_2_createRegulons <- function(scenicOptions,
 	rf <- arrow::ReadableFile$create(dbFilePath)
 	fr <- arrow::FeatherReader$create(rf)
 	genesInDb <- names(fr)
-	rnktype <- "features"        #TODO: add as option for custom dbs
+	rnktype <- dbIndexCol        #TODO: add as option for custom dbs
 	genesInDb <- genesInDb[genesInDb != rnktype]
 	})))
   
