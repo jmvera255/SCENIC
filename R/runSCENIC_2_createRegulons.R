@@ -70,11 +70,11 @@ runSCENIC_2_createRegulons <- function(scenicOptions,
   if(any(!loadAttempt)) stop("It is not possible to load the following databses: \n",
                                 paste(dbs[which(!loadAttempt)], collapse="\n"))
   
-  genesInDb <- unique(unlist(lapply(getDatabases(scenicOptions), function(dbFilePath) {
+  genesInDb <- unique(unlist(lapply(getDatabases(scenicOptions), function(dbFilePath, rnktype = dbIndexCol) {
 	rf <- arrow::ReadableFile$create(dbFilePath)
 	fr <- arrow::FeatherReader$create(rf)
 	genesInDb <- names(fr)
-	rnktype <- dbIndexCol        #TODO: add as option for custom dbs
+	#rnktype <- dbIndexCol        #TODO: add as option for custom dbs
 	genesInDb <- genesInDb[genesInDb != rnktype]
 	})))
   
